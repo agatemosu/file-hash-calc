@@ -19,8 +19,8 @@ fileInput.addEventListener("change", async function () {
             <b class="hack">SHA512</b>: ${sha512}
         `;
 
-        resultsList.appendChild(fileInfoRow);
-        resultsList.appendChild(hashInfoRow);
+        resultsList.insertBefore(hashInfoRow, resultsList.firstChild);
+        resultsList.insertBefore(fileInfoRow, resultsList.firstChild);
     }
 });
 
