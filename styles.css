@@ -1,0 +1,44 @@
+* {
+    margin: 0;
+    word-break: break-word;
+}
+
+body {
+    font-family: "JetBrains Mono", monospace;
+    background-color: #7d4053;
+    color: #e5cfd6;
+}
+
+h1, h2 {
+    margin: 20px;
+}
+
+/* Upload file */
+input {
+    display: none;
+}
+
+.upload-button {
+    background-color: #40477d;
+    color: #e6e8f2;
+    display: block;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.upload-button:hover {
+    background-color: #5c6397;
+}
+
+/* Table */
+table {
+    width: 100%;
+}
+
+.hack {
+    padding-left: 20px;
+}
+
+tr:hover {
+    background-color: #975c6e;
+}
