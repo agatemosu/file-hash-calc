@@ -5,12 +5,48 @@
 
 body {
     font-family: "JetBrains Mono", monospace;
-    background-color: #7d4053;
-    color: #e5cfd6;
 }
 
 h1, h2 {
     margin: 20px;
+}
+
+/* Light theme */
+body.light-mode {
+    background-color: #e4e7f1;
+    color: #33416e;
+}
+
+body.light-mode .upload-button {
+    background-color: #c59ba5;
+    color: #6e3341;
+}
+
+body.light-mode .upload-button:hover {
+    background-color: #a8727f;
+}
+
+body.light-mode tr:hover {
+    background-color: #b1bad3;
+}
+
+/* Dark theme */
+body.dark-mode {
+    background-color: #7d4053;
+    color: #e5cfd6;
+}
+
+body.dark-mode .upload-button {
+    background-color: #40477d;
+    color: #e6e8f2;
+}
+
+body.dark-mode .upload-button:hover {
+    background-color: #5c6397;
+}
+
+body.dark-mode tr:hover {
+    background-color: #975c6e;
 }
 
 /* Upload file */
@@ -19,15 +55,9 @@ input {
 }
 
 .upload-button {
-    background-color: #40477d;
-    color: #e6e8f2;
     display: block;
     padding: 10px 20px;
     cursor: pointer;
-}
-
-.upload-button:hover {
-    background-color: #5c6397;
 }
 
 /* Table */
@@ -37,8 +67,4 @@ table {
 
 .hack {
     padding-left: 20px;
-}
-
-tr:hover {
-    background-color: #975c6e;
 }

@@ -6,12 +6,15 @@
     <title>File hash calculator</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body>
-    <h1>File hash calculator</h1>
-    <label for="fileInput" class="upload-button">Choose file/s</label>
-    <input type="file" id="fileInput" multiple>
-    <h2>Results</h2>
-    <table id="resultsList"></table>
+<body class="dark-mode">
+    <button id="toggleButton">Theme</button>
+    <main>
+        <h1>File hash calculator</h1>
+        <label for="fileInput" class="upload-button">Choose file/s</label>
+        <input type="file" id="fileInput" multiple>
+        <h2>Results</h2>
+        <table id="resultsList"></table>
+    </main>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
     <script src="script.js"></script>
 </body>
