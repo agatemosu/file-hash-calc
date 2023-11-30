@@ -1,33 +1,27 @@
 const fileInput = document.getElementById("fileInput");
 const resultsList = document.getElementById("resultsList");
-const toggleButton = document.getElementById("toggleButton");
-const body = document.body;
 
-toggleButton.addEventListener("click", () => {
-    body.classList.toggle("dark-mode");
-    body.classList.toggle("light-mode");
-});
-
-fileInput.addEventListener("change", async function () {
+fileInput.addEventListener("change", async () => {
     if (fileInput.files.length > 0) {
-        const file = fileInput.files[0];
-        const fileBuffer = await readFileAsArrayBuffer(file);
+        for (const file of fileInput.files) {
+            const fileBuffer = await readFileAsArrayBuffer(file);
 
-        const { md5, sha1, sha256, sha512 } = await calculateHashes(fileBuffer);
+            const { md5, sha1, sha256, sha512 } = await calculateHashes(fileBuffer);
 
-        const fileInfoRow = document.createElement("tr");
-        fileInfoRow.innerHTML = `<b class="hack">${file.name}</b> - ${file.size} bytes`;
+            const fileInfoRow = document.createElement("tr");
+            fileInfoRow.innerHTML = `<b class="table-padding">${file.name}</b> - ${file.size} bytes`;
 
-        const hashInfoRow = document.createElement("tr");
-        hashInfoRow.innerHTML = `
-            <b class="hack">MD5</b>: ${md5}<br>
-            <b class="hack">SHA1</b>: ${sha1}<br>
-            <b class="hack">SHA256</b>: ${sha256}<br>
-            <b class="hack">SHA512</b>: ${sha512}
-        `;
+            const hashInfoRow = document.createElement("tr");
+            hashInfoRow.innerHTML = `
+                <b class="table-padding">MD5</b>: ${md5}<br>
+                <b class="table-padding">SHA1</b>: ${sha1}<br>
+                <b class="table-padding">SHA256</b>: ${sha256}<br>
+                <b class="table-padding">SHA512</b>: ${sha512}
+            `;
 
-        resultsList.insertBefore(hashInfoRow, resultsList.firstChild);
-        resultsList.insertBefore(fileInfoRow, resultsList.firstChild);
+            resultsList.insertBefore(hashInfoRow, resultsList.firstChild);
+            resultsList.insertBefore(fileInfoRow, resultsList.firstChild);
+        }
     }
 });
 
