@@ -1,46 +1,46 @@
 * {
-    margin: 0;
-    word-break: break-word;
+  margin: 0;
+  word-break: break-word;
 }
 
 body {
-    font-family: "JetBrains Mono", monospace;
-    background-color: #7d4053;
-    color: #e5cfd6;
+  font-family: "JetBrains Mono", monospace;
+  background-color: #7d4053;
+  color: #e5cfd6;
 }
 
 h1, h2 {
-    margin: 20px;
+  margin: 20px;
 }
 
 .upload-button {
-    background-color: #40477d;
-    color: #e6e8f2;
+  background-color: #40477d;
+  color: #e6e8f2;
 }
 
 .upload-button:hover {
-    background-color: #5c6397;
+  background-color: #5c6397;
 }
 
 tr:hover {
-    background-color: #975c6e;
+  background-color: #975c6e;
 }
 
 input {
-    display: none;
+  display: none;
 }
 
 .upload-button {
-    display: block;
-    padding: 10px 20px;
-    cursor: pointer;
+  display: block;
+  padding: 10px 20px;
+  cursor: pointer;
 }
 
 table {
-    margin-bottom: 20px;
-    width: 100%;
+  margin-bottom: 20px;
+  width: 100%;
 }
 
 .table-padding {
-    padding-left: 20px;
+  padding-left: 20px;
 }
