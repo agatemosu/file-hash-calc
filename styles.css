@@ -1,0 +1,40 @@
+* {
+	box-sizing: border-box;
+	margin: 0;
+	word-break: break-all;
+}
+
+body {
+	background-color: #7d4053;
+	color: #e5cfd6;
+	font-family: "JetBrains Mono", monospace;
+}
+
+h1,
+h2 {
+	margin: 20px;
+}
+
+input {
+	display: none;
+}
+
+.upload-button {
+	display: block;
+	cursor: pointer;
+	background-color: #40477d;
+	padding: 10px 20px;
+	color: #e6e8f2;
+
+	&:hover {
+		background-color: #5c6397;
+	}
+}
+
+article > div {
+	padding-left: 20px;
+
+	&:hover {
+		background-color: #975c6e;
+	}
+}
