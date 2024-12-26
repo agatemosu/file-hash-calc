@@ -13,10 +13,8 @@ class FileResult extends HTMLElement {
 		super();
 		this.innerHTML = /* HTML */ `
 			<div>
-				<p>
-					<b>${file.name}</b> -
-					<span>${file.size} bytes</span>
-				</p>
+				<b>${file.name}</b> -
+				<span>${file.size} bytes</span>
 			</div>
 			<div>
 				<p><b>MD5</b>: <span>${hashes.md5}</span></p>
