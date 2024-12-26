@@ -1,3 +1,5 @@
+import CryptoJS from "https://cdn.jsdelivr.net/npm/crypto-js@4.2.0/+esm";
+
 const fileInput = document.querySelector("#fileInput");
 const resultsList = document.querySelector("#resultsList");
 const template = document.querySelector("template");
