@@ -19,16 +19,16 @@ fileInput.addEventListener("change", async () => {
 	}
 });
 
-function addRow({ name, size }, { md5, sha1, sha256, sha512 }) {
+function addRow(file, hashes) {
 	const clonedTemplate = template.content.cloneNode(true);
 
 	const items = [
-		{ selector: ".name", value: name },
-		{ selector: ".size", value: size },
-		{ selector: ".md5", value: md5 },
-		{ selector: ".sha1", value: sha1 },
-		{ selector: ".sha256", value: sha256 },
-		{ selector: ".sha512", value: sha512 },
+		{ selector: ".name", value: file.name },
+		{ selector: ".size", value: file.size.toString() },
+		{ selector: ".md5", value: hashes.md5 },
+		{ selector: ".sha1", value: hashes.sha1 },
+		{ selector: ".sha256", value: hashes.sha256 },
+		{ selector: ".sha512", value: hashes.sha512 },
 	];
 
 	for (const item of items) {
