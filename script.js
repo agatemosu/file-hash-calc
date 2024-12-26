@@ -6,7 +6,7 @@ const template = document.querySelector("template");
 
 fileInput.addEventListener("change", async () => {
 	for (const file of fileInput.files) {
-		const fileBuffer = await readFileAsArrayBuffer(file);
+		const fileBuffer = await file.arrayBuffer();
 		const hashes = await calculateHashes(fileBuffer);
 
 		addRow(file, hashes);
@@ -45,13 +45,4 @@ async function calculateHashes(buffer) {
 		sha256: sha256.toString(CryptoJS.enc.Hex),
 		sha512: sha512.toString(CryptoJS.enc.Hex),
 	};
-}
-
-async function readFileAsArrayBuffer(file) {
-	return new Promise((resolve, reject) => {
-		const reader = new FileReader();
-		reader.onload = (event) => resolve(event.target.result);
-		reader.onerror = (error) => reject(error);
-		reader.readAsArrayBuffer(file);
-	});
 }
