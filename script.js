@@ -3,9 +3,35 @@ import CryptoJS from "https://cdn.jsdelivr.net/npm/crypto-js@4.2.0/+esm";
 /** @type {HTMLInputElement} */
 const fileInput = document.querySelector("#fileInput");
 const resultsList = document.querySelector("#resultsList");
-const template = document.querySelector("template");
 
-fileInput.addEventListener("change", async () => {
+class FileResult extends HTMLElement {
+	/**
+	 * @param {File} file
+	 * @param {FileHashes} hashes
+	 */
+	constructor(file, hashes) {
+		super();
+		this.innerHTML = /* HTML */ `
+			<div>
+				<p>
+					<b>${file.name}</b> -
+					<span>${file.size} bytes</span>
+				</p>
+			</div>
+			<div>
+				<p><b>MD5</b>: <span>${hashes.md5}</span></p>
+				<p><b>SHA1</b>: <span>${hashes.sha1}</span></p>
+				<p><b>SHA256</b>: <span>${hashes.sha256}</span></p>
+				<p><b>SHA512</b>: <span>${hashes.sha512}</span></p>
+			</div>
+		`;
+	}
+}
+
+customElements.define("file-result", FileResult);
+fileInput.addEventListener("change", main);
+
+async function main() {
 	for (const file of fileInput.files) {
 		const fileBuffer = await file.arrayBuffer();
 
@@ -16,33 +42,9 @@ fileInput.addEventListener("change", async () => {
 		const sha256 = await hash("SHA-256", fileBuffer);
 		const sha512 = await hash("SHA-512", fileBuffer);
 
-		addRow(file, { md5, sha1, sha256, sha512 });
+		const fileResult = new FileResult(file, { md5, sha1, sha256, sha512 });
+		resultsList.insertBefore(fileResult, resultsList.firstChild);
 	}
-});
-
-/**
- * @param {File} file
- * @param {FileHashes} hashes
- */
-function addRow(file, hashes) {
-	const clonedTemplate = /** @type {Element} */ (
-		template.content.cloneNode(true)
-	);
-
-	const items = [
-		{ selector: ".name", value: file.name },
-		{ selector: ".size", value: file.size.toString() },
-		{ selector: ".md5", value: hashes.md5 },
-		{ selector: ".sha1", value: hashes.sha1 },
-		{ selector: ".sha256", value: hashes.sha256 },
-		{ selector: ".sha512", value: hashes.sha512 },
-	];
-
-	for (const item of items) {
-		clonedTemplate.querySelector(item.selector).textContent = item.value;
-	}
-
-	resultsList.insertBefore(clonedTemplate, resultsList.firstChild);
 }
 
 /**

@@ -31,7 +31,7 @@ input {
 	}
 }
 
-article > div {
+file-result > div {
 	padding-left: 20px;
 
 	&:hover {
