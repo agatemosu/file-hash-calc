@@ -1,6 +1,5 @@
 import CryptoJS from "https://cdn.jsdelivr.net/npm/crypto-js@4.2.0/+esm";
 
-/** @type {HTMLInputElement} */
 const fileInput = document.querySelector("#fileInput");
 const resultsList = document.querySelector("#resultsList");
 
@@ -27,10 +26,26 @@ class FileResult extends HTMLElement {
 }
 
 customElements.define("file-result", FileResult);
-fileInput.addEventListener("change", main);
 
-async function main() {
-	for (const file of fileInput.files) {
+document.addEventListener("dragover", (e) => {
+	e.preventDefault();
+});
+
+document.addEventListener("drop", (e) => {
+	e.preventDefault();
+	main(e.dataTransfer.files);
+});
+
+fileInput.addEventListener("change", (e) => {
+	const input = /** @type {HTMLInputElement} */ (e.target);
+	main(input.files);
+});
+
+/**
+ * @param {FileList} files
+ */
+async function main(files) {
+	for (const file of files) {
 		const fileBuffer = await file.arrayBuffer();
 
 		const wordArray = CryptoJS.lib.WordArray.create(fileBuffer);
