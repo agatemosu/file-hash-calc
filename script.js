@@ -7,9 +7,14 @@ const template = document.querySelector("template");
 fileInput.addEventListener("change", async () => {
 	for (const file of fileInput.files) {
 		const fileBuffer = await file.arrayBuffer();
-		const hashes = await calculateHashes(fileBuffer);
 
-		addRow(file, hashes);
+		const wordArray = CryptoJS.lib.WordArray.create(fileBuffer);
+		const md5 = CryptoJS.MD5(wordArray);
+		const sha1 = CryptoJS.SHA1(wordArray);
+		const sha256 = CryptoJS.SHA256(wordArray);
+		const sha512 = CryptoJS.SHA512(wordArray);
+
+		addRow(file, { md5, sha1, sha256, sha512 });
 	}
 });
 
@@ -30,19 +35,4 @@ function addRow({ name, size }, { md5, sha1, sha256, sha512 }) {
 	}
 
 	resultsList.insertBefore(clonedTemplate, resultsList.firstChild);
-}
-
-async function calculateHashes(buffer) {
-	const wordArray = CryptoJS.lib.WordArray.create(buffer);
-	const md5 = CryptoJS.MD5(wordArray);
-	const sha1 = CryptoJS.SHA1(wordArray);
-	const sha256 = CryptoJS.SHA256(wordArray);
-	const sha512 = CryptoJS.SHA512(wordArray);
-
-	return {
-		md5: md5.toString(CryptoJS.enc.Hex),
-		sha1: sha1.toString(CryptoJS.enc.Hex),
-		sha256: sha256.toString(CryptoJS.enc.Hex),
-		sha512: sha512.toString(CryptoJS.enc.Hex),
-	};
 }
