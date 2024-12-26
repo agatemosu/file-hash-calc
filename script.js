@@ -1,5 +1,6 @@
 import CryptoJS from "https://cdn.jsdelivr.net/npm/crypto-js@4.2.0/+esm";
 
+/** @type {HTMLInputElement} */
 const fileInput = document.querySelector("#fileInput");
 const resultsList = document.querySelector("#resultsList");
 const template = document.querySelector("template");
@@ -19,8 +20,14 @@ fileInput.addEventListener("change", async () => {
 	}
 });
 
+/**
+ * @param {File} file
+ * @param {FileHashes} hashes
+ */
 function addRow(file, hashes) {
-	const clonedTemplate = template.content.cloneNode(true);
+	const clonedTemplate = /** @type {Element} */ (
+		template.content.cloneNode(true)
+	);
 
 	const items = [
 		{ selector: ".name", value: file.name },
@@ -38,6 +45,10 @@ function addRow(file, hashes) {
 	resultsList.insertBefore(clonedTemplate, resultsList.firstChild);
 }
 
+/**
+ * @param {AlgorithmIdentifier} algorithm
+ * @param {BufferSource} data
+ */
 async function hash(algorithm, data) {
 	const hashBuffer = await crypto.subtle.digest(algorithm, data);
 	const byteArray = new Uint8Array(hashBuffer);
