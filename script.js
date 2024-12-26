@@ -9,10 +9,11 @@ fileInput.addEventListener("change", async () => {
 		const fileBuffer = await file.arrayBuffer();
 
 		const wordArray = CryptoJS.lib.WordArray.create(fileBuffer);
-		const md5 = CryptoJS.MD5(wordArray);
-		const sha1 = CryptoJS.SHA1(wordArray);
-		const sha256 = CryptoJS.SHA256(wordArray);
-		const sha512 = CryptoJS.SHA512(wordArray);
+		const md5 = CryptoJS.MD5(wordArray).toString();
+
+		const sha1 = await hash("SHA-1", fileBuffer);
+		const sha256 = await hash("SHA-256", fileBuffer);
+		const sha512 = await hash("SHA-512", fileBuffer);
 
 		addRow(file, { md5, sha1, sha256, sha512 });
 	}
@@ -35,4 +36,13 @@ function addRow({ name, size }, { md5, sha1, sha256, sha512 }) {
 	}
 
 	resultsList.insertBefore(clonedTemplate, resultsList.firstChild);
+}
+
+async function hash(algorithm, data) {
+	const hashBuffer = await crypto.subtle.digest(algorithm, data);
+	const byteArray = new Uint8Array(hashBuffer);
+
+	return Array.from(byteArray)
+		.map((byte) => byte.toString(16).padStart(2, "0"))
+		.join("");
 }
