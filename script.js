@@ -1,4 +1,4 @@
-import CryptoJS from "https://cdn.jsdelivr.net/npm/crypto-js@4.2.0/+esm";
+import SparkMD5 from "https://cdn.jsdelivr.net/npm/spark-md5@3.0.2/+esm";
 
 const fileInput = document.querySelector("#fileInput");
 const resultsList = document.querySelector("#resultsList");
@@ -48,8 +48,7 @@ async function main(files) {
 	for (const file of files) {
 		const fileBuffer = await file.arrayBuffer();
 
-		const wordArray = CryptoJS.lib.WordArray.create(fileBuffer);
-		const md5 = CryptoJS.MD5(wordArray).toString();
+		const md5 = SparkMD5.ArrayBuffer.hash(fileBuffer);
 
 		const sha1 = await hash("SHA-1", fileBuffer);
 		const sha256 = await hash("SHA-256", fileBuffer);
