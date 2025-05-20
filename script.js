@@ -17,7 +17,6 @@ class FileResult extends HTMLElement {
 			</div>
 			<div>
 				<p><b>MD5</b>: <span>${hashes.md5}</span></p>
-				<p><b>SHA1</b>: <span>${hashes.sha1}</span></p>
 				<p><b>SHA256</b>: <span>${hashes.sha256}</span></p>
 				<p><b>SHA512</b>: <span>${hashes.sha512}</span></p>
 			</div>
@@ -50,11 +49,10 @@ async function main(files) {
 
 		const md5 = SparkMD5.ArrayBuffer.hash(fileBuffer);
 
-		const sha1 = await hash("SHA-1", fileBuffer);
 		const sha256 = await hash("SHA-256", fileBuffer);
 		const sha512 = await hash("SHA-512", fileBuffer);
 
-		const fileResult = new FileResult(file, { md5, sha1, sha256, sha512 });
+		const fileResult = new FileResult(file, { md5, sha256, sha512 });
 		resultsList.insertBefore(fileResult, resultsList.firstChild);
 	}
 }
