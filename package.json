@@ -6,13 +6,14 @@
 	"type": "module",
 	"scripts": {
 		"dev": "vite",
-		"build": "vite build",
+		"build": "tsc && vite build",
 		"preview": "vite preview"
 	},
 	"dependencies": {
 		"hash-wasm": "4.12.0"
 	},
 	"devDependencies": {
+		"typescript": "5.8.3",
 		"vite": "6.3.5"
 	}
 }

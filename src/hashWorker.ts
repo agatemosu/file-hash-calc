@@ -1,10 +1,6 @@
 import { md5 as hashMD5 } from "hash-wasm";
 
-/**
- * @param {AlgorithmIdentifier} algorithm
- * @param {BufferSource} data
- */
-async function digest(algorithm, buffer) {
+async function digest(algorithm: AlgorithmIdentifier, buffer: BufferSource) {
 	const hashBuffer = await crypto.subtle.digest(algorithm, buffer);
 	const byteArray = new Uint8Array(hashBuffer);
 
@@ -13,8 +9,7 @@ async function digest(algorithm, buffer) {
 		.join("");
 }
 
-self.onmessage = async (e) => {
-	/** @type {WorkerParams} */
+self.onmessage = async (e: MessageEvent<WorkerParams>) => {
 	const { file } = e.data;
 
 	const fileBuffer = new Uint8Array(await file.arrayBuffer());
@@ -27,5 +22,5 @@ self.onmessage = async (e) => {
 	self.postMessage({
 		fileData: { name: file.name, size: file.size },
 		hashes: { md5, sha256, sha512 },
-	});
+	} satisfies WorkerResult);
 };

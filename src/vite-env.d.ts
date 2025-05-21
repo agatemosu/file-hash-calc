@@ -1,3 +1,5 @@
+/// <reference types="vite/client" />
+
 interface FileData {
 	name: string;
 	size: number;

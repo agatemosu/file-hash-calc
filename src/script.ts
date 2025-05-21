@@ -1,14 +1,10 @@
-import HashWorker from "./hashWorker.js??worker";
+import HashWorker from "./hashWorker.ts?worker";
 
-const fileInput = document.querySelector("#fileInput");
-const resultsList = document.querySelector("#resultsList");
+const fileInput = document.querySelector("#fileInput") as HTMLInputElement;
+const resultsList = document.querySelector("#resultsList") as HTMLUListElement;
 
 class FileResult extends HTMLElement {
-	/**
-	 * @param {FileData} file
-	 * @param {FileHashes} hashes
-	 */
-	constructor(file, hashes) {
+	constructor(file: FileData, hashes: FileHashes) {
 		super();
 		this.innerHTML = /* HTML */ `
 			<div>
@@ -32,26 +28,25 @@ document.addEventListener("dragover", (e) => {
 
 document.addEventListener("drop", (e) => {
 	e.preventDefault();
-	main(e.dataTransfer.files);
+	if (e.dataTransfer?.files) {
+		main(e.dataTransfer.files);
+	}
 });
 
 fileInput.addEventListener("change", (e) => {
-	const input = /** @type {HTMLInputElement} */ (e.target);
-	main(input.files);
+	const input = e.currentTarget as HTMLInputElement;
+	if (input.files) {
+		main(input.files);
+	}
 });
 
-/**
- * @param {FileList} files
- */
-async function main(files) {
+async function main(files: FileList) {
 	for (const file of files) {
-		/** @type {Worker} */
-		const worker = new HashWorker();
+		const worker: Worker = new HashWorker();
 
-		worker.postMessage({ file });
+		worker.postMessage({ file } satisfies WorkerParams);
 
-		worker.onmessage = (e) => {
-			/** @type {WorkerResult} */
+		worker.onmessage = (e: MessageEvent<WorkerResult>) => {
 			const { hashes } = e.data;
 
 			const result = new FileResult(file, hashes);
