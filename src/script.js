@@ -1,4 +1,4 @@
-import SparkMD5 from "https://cdn.jsdelivr.net/npm/spark-md5@3.0.2/+esm";
+import SparkMD5 from "spark-md5";
 
 const fileInput = document.querySelector("#fileInput");
 const resultsList = document.querySelector("#resultsList");
