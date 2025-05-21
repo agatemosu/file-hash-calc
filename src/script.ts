@@ -1,7 +1,7 @@
 import HashWorker from "./hashWorker.ts?worker";
 
 const fileInput = document.querySelector("#fileInput") as HTMLInputElement;
-const resultsList = document.querySelector("#resultsList") as HTMLUListElement;
+const resultsList = document.querySelector("#resultsList") as HTMLElement;
 
 class FileResult extends HTMLElement {
 	constructor(file: FileData, hashes: FileHashes) {
