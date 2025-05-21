@@ -1,4 +1,4 @@
-import SparkMD5 from "spark-md5";
+import { md5 as hashMD5 } from "hash-wasm";
 
 /**
  * @param {AlgorithmIdentifier} algorithm
@@ -17,9 +17,9 @@ self.onmessage = async (e) => {
 	/** @type {WorkerParams} */
 	const { file } = e.data;
 
-	const fileBuffer = await file.arrayBuffer();
+	const fileBuffer = new Uint8Array(await file.arrayBuffer());
 
-	const md5 = SparkMD5.ArrayBuffer.hash(fileBuffer);
+	const md5 = await hashMD5(fileBuffer);
 
 	const sha256 = await digest("SHA-256", fileBuffer);
 	const sha512 = await digest("SHA-512", fileBuffer);
